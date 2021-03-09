@@ -1,6 +1,4 @@
 <template>
-  <AppHeader />
-
   <div class="w-full flex">
     <div class="m-auto">
       <h3 class="text-2xl text-center">Marvel Heros {{ totalHeros }}</h3>
@@ -36,11 +34,8 @@
 </template>
 
 <script>
-import AppHeader from "./AppHeader";
 export default {
-  components: {
-    AppHeader,
-  },
+  
   data() {
     return {
       marvelHeros: [
