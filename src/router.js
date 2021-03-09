@@ -1,10 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import DCHeros from "./components/DCHeros";
-import Calendar from "./components/Calender";
+import Home from "./pages/Home";
+import MarvelHeros from "./pages/MarvelHeros";
+import Calendar from "./pages/Calender";
 
 const routes = [
-  { path: "/marvel-heros", component: DCHeros },
+  { path: "/", component: Home },
+  { path: "/marvel-heros", component: MarvelHeros },
   { path: "/calendar", component: Calendar },
 ];
 
