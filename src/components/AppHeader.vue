@@ -9,6 +9,7 @@
       :to="link.to"
       >{{ link.title }}</router-link
     >
+    <button class="mx-2" @click="$emit('open-login-model')">Login</button>
   </nav>
 </template>
 
@@ -21,6 +22,7 @@ export default {
         { title: "Marvel Heros", to: "/marvel-heros" },
         { title: "Calendar", to: "/calendar" },
         { title: "Markdown", to: "/markdown" },
+        { title: "Slider", to: "/slider" },
       ],
     };
   },
