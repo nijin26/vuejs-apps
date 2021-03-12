@@ -9,12 +9,23 @@
       :to="link.to"
       >{{ link.title }}</router-link
     >
-    <button class="mx-2" @click="$emit('open-login-model')">Login</button>
+    <button v-if="!isAuth" class="mx-2" @click="$emit('open-login-model')">
+      Login
+    </button>
+    <button v-if="isAuth" class="mx-2" @click="$emit('logout-user')">
+      Logout
+    </button>
   </nav>
 </template>
 
 <script>
 export default {
+  props: {
+    isAuth: {
+      type: Boolean,
+      required: true,
+    },
+  },
   data() {
     return {
       list: [

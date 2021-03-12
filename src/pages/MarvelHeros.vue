@@ -17,6 +17,7 @@
       </ol>
       <form class="mt-10" @submit.prevent="addHero">
         <input
+          ref="newHero"
           class="border rounded "
           v-model.trim="newHero"
           placeholder="Type Hero Name"
@@ -60,6 +61,9 @@ export default {
     totalHeros() {
       return this.marvelHeros.length;
     },
+  },
+  mounted() {
+    this.$refs.newHero.focus();
   },
 };
 </script>
