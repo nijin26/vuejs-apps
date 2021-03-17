@@ -34,6 +34,8 @@ export default {
         { title: "Calendar", to: "/calendar" },
         { title: "Markdown", to: "/markdown" },
         { title: "Slider", to: "/slider" },
+        { title: "Calculator", to: "/calculator" },
+        { title: "Chats", to: "/chats" },
       ],
     };
   },
