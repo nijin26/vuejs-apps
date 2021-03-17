@@ -20,12 +20,6 @@
 
 <script>
 export default {
-  props: {
-    isAuth: {
-      type: Boolean,
-      required: true,
-    },
-  },
   data() {
     return {
       list: [
@@ -39,6 +33,11 @@ export default {
       ],
     };
   },
+  computed:{
+    isAuth() {
+      return this.$store.state.isAuth
+    }
+  }
 };
 </script>
 
