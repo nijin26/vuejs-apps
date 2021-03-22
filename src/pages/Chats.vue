@@ -8,7 +8,7 @@
             v-for="chat in state.chats"
             :key="chat.message"
             class="w-full"
-            :class="chat.uid === uid ? 'text-right' : ''"
+            :class="chat.uid === state.uid ? 'text-right' : ''"
           >
             {{ chat.message }}
           </div>
@@ -18,46 +18,40 @@
             type="text"
             v-model="state.message"
             class="p-1 border rounder shadow"
-            @keydown.enter="onSubmit()"
+            @keydown.enter="onSubmit"
           />
         </div>
       </div>
     </div>
-
   </section>
 </template>
 
 <script>
-import { computed, onMounted, reactive } from "vue";
+import { onMounted, reactive } from "vue";
 
-import firebase,{chatRefs} from "../utilities/firebase";
-import {useStore} from 'vuex'
-
+import firebase from "../utilities/firebase";
 export default {
   setup() {
     const state = reactive({
-      chats: [],
+      chats: {},
       message: "",
+      collection: null,
+      uid: null,
     });
-
-    const store = useStore()
-
-    const uid = computed(() => store.state.authUser.uid)
-
     onMounted(async () => {
-      chatRefs.on("child_added", (snapshot) => {
-        state.uid = firebase.auth().currentUser.uid;
-        state.chats.push({key:snapshot.key,...snapshot.val()})
+      state.uid = firebase.auth().currentUser.uid;
+      state.collection.on("child_added", (snapshot) => {
+        state.chats = snapshot.val();
+        state.message = "";
       });
     });
 
     const onSubmit = () => {
-      const newChat = chatRefs.push();
+      const newChat = state.collection.push();
       newChat.set({ uid: state.uid, message: state.message });
-      state.message = "";
     };
 
-    return { state, onSubmit,uid };
+    return { state, onSubmit };
   },
 };
 </script>

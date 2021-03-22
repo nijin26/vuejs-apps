@@ -30,7 +30,6 @@ export default {
   },
   methods: {
     update(e) {
-      this.text = e.target.value;
       const task = () => (this.text = e.target.value);
       this.debounce(task, 500);
     },
