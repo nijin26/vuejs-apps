@@ -2,6 +2,12 @@
   <section class="flex w-full">
     <div class="mt-10 m-auto">
       <div>
+        <button
+          class="px-2 py-1 border rounded my-4"
+          @click="isModalOpen = true"
+        >
+          Add User
+        </button>
         <table>
           <thead>
             <tr>
@@ -51,36 +57,83 @@
       </div>
     </div>
   </section>
+  <teleport to="body">
+    <Modal v-if="isModalOpen" @close-login-model="isModalOpen = false">
+      <template #title>
+        Add New User
+      </template>
+      <template #body>
+        <form>
+          <div class="p-2">
+            <label>User Name</label>
+            <input
+              class="w-full p-2 rounded border"
+              placeholder="User Name"
+              type="text"
+            />
+          </div>
+          <div class="p-2">
+            <label>Email</label>
+            <input
+              class="w-full p-2 rounded border"
+              placeholder="User Email"
+              type="email"
+            />
+          </div>
+          <div class="p-2">
+            <label>Avatar</label>
+            <input
+              class="w-full p-2 rounded border"
+              placeholder="Avatar URL"
+              type="text"
+            />
+          </div>
+          <div class="p-2">
+            <label>Avatar</label>
+            <input
+              class="w-full p-2 rounded border hover:bg-grey-300"
+              placeholder="Avatar URL"
+              type="submit"
+              value="Create"
+            />
+          </div>
+        </form>
+      </template>
+    </Modal>
+  </teleport>
 </template>
 
 <script>
-import { onMounted, reactive } from "vue";
+import { onMounted, reactive, ref } from "vue";
+import axios from "../utilities/axios";
+import Modal from "../components/Modal";
 
-import axios from "axios";
 export default {
+  components: {
+    Modal,
+  },
   setup() {
+    const isModalOpen = ref(false);
     const state = reactive({
       users: {},
     });
 
     onMounted(async () => {
-      const { data } = await axios.get(`${process.env.VUE_APP_API_URL}/users`);
+      const { data } = await axios.get(`/users`);
       state.users = data;
     });
 
     const next = async () => {
-      const { data } = await axios.get(
-        `${process.env.VUE_APP_API_URL}/users?page=2`
-      );
+      const { data } = await axios.get(`/users?page=2`);
       state.users = data;
     };
 
     const prev = async () => {
-      const { data } = await axios.get(`${process.env.VUE_APP_API_URL}/users`);
+      const { data } = await axios.get(`/users`);
       state.users = data;
     };
 
-    return { state, next, prev };
+    return { state, next, prev, isModalOpen };
   },
 };
 </script>
