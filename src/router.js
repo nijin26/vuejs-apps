@@ -8,6 +8,7 @@ import Slider from "./pages/Slider";
 import Calculator from "./pages/Calculator";
 import Chats from "./pages/Chats";
 import UserCrud from "./pages/UserCrud";
+import Tensorflow from "./pages/Tensorflow";
 import { store } from "./store/index";
 
 const routes = [
@@ -18,6 +19,7 @@ const routes = [
   { path: "/slider", component: Slider },
   { path: "/calculator", component: Calculator },
   { path: "/usercrud", component: UserCrud },
+  { path: "/tensorflow", component: Tensorflow },
   {
     path: "/chats",
     component: Chats,

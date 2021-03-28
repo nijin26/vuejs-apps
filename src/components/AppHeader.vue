@@ -33,6 +33,7 @@ export default {
         { title: "Calculator", to: "/calculator" },
         { title: "Chats", to: "/chats" },
         { title: "User CRUD", to: "/usercrud" },
+        { title: "Tensor Flow", to: "/tensorflow" },
       ],
     };
   },

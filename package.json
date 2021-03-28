@@ -9,6 +9,11 @@
   },
   "dependencies": {
     "@rstacruz/startup-name-generator": "0.3.0",
+    "@tensorflow-models/coco-ssd": "^2.2.1",
+    "@tensorflow/tfjs-backend-cpu": "^3.3.0",
+    "@tensorflow/tfjs-backend-webgl": "^3.3.0",
+    "@tensorflow/tfjs-converter": "^3.3.0",
+    "@tensorflow/tfjs-core": "^3.3.0",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "firebase": "^8.3.0",
