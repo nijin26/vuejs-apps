@@ -129,7 +129,6 @@ export default {
     onMounted(() => {
       window.addEventListener("keydown", (e) => {
         pressed(e.key);
-        console.log(e);
       });
     });
 

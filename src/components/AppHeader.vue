@@ -9,16 +9,18 @@
       :to="link.to"
       >{{ link.title }}</router-link
     >
-    <button v-if="!isAuth" class="mx-2" @click="$emit('open-login-model')">
+    <button v-if="!isAuth" class="mx-2" @click="openLogin">
       Login
     </button>
-    <button v-if="isAuth" class="mx-2" @click="$emit('logout-user')">
+    <button v-if="isAuth" class="mx-2" @click="logOutUser">
       Logout
     </button>
   </nav>
 </template>
 
 <script>
+import firebase from "../utilities/firebase";
+
 export default {
   data() {
     return {
@@ -30,14 +32,31 @@ export default {
         { title: "Slider", to: "/slider" },
         { title: "Calculator", to: "/calculator" },
         { title: "Chats", to: "/chats" },
+        { title: "User CRUD", to: "/usercrud" },
       ],
     };
   },
-  computed:{
+  computed: {
     isAuth() {
-      return this.$store.state.isAuth
-    }
-  }
+      return this.$store.state.isAuth;
+    },
+  },
+  methods: {
+    openLogin() {
+      this.$store.commit("setLoginModal", true);
+    },
+    logOutUser() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          console.log("Sign Out Succesfull");
+        })
+        .catch((error) => {
+          console.log("Sign Out Error" + error);
+        });
+    },
+  },
 };
 </script>
 
